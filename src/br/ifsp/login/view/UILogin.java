@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -46,16 +45,22 @@ public class UILogin {
 		JButton btnEntrar = new JButton("ENTRAR");
 		btnEntrar.addActionListener(new ActionListener() {
 			
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				
-				JDBCControll controle = new JDBCControll();
+				JDBCControll controleAcesso = new JDBCControll();
 				
-				if (txtUser.getText() == controle.obterLogin().toString()) {
-					JOptionPane.showInputDialog("ACESSO CONCEDIDO");
-				}
-				else {
-					JOptionPane.showInputDialog("ACESSO NEGADO");
-				}
+					controleAcesso.Logar(txtUser.getText(), txtPwd.getText());
+					
+					if(controleAcesso.permissao == true) {
+						System.exit(0);
+					}
+					
+					if(controleAcesso.permissao == false) {
+						txtUser.setText("");
+						txtPwd.setText("");
+						txtUser.requestFocus();
+					}
 			}
 		});
 		panel.add(btnEntrar);

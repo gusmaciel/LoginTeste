@@ -1,16 +1,13 @@
 package br.ifsp.login.controle;
 
-import java.util.ArrayList;
-
 import br.ifsp.login.dao.ILogin;
 import br.ifsp.login.dao.JDBCLogin;
-import br.ifsp.login.modelo.Login;
 
-public class JDBCControll {
+public class JDBCControll extends JDBCLogin {
 	
-	public ArrayList<Login> obterLogin() {
+	public void Logar(String login, String senha) {
 		
 		ILogin log = new JDBCLogin();
-		return log.obterLogin();
+		log.Logar(login, senha);
 	}
 }
